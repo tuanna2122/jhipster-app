@@ -1,0 +1,35 @@
+
+<div *ngIf="comment">
+    <h2><span jhiTranslate="baeldungappApp.comment.detail.title">Comment</span> {{comment.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="baeldungappApp.comment.text">Text</span></dt>
+        <dd>
+            <span>{{comment.text}}</span>
+        </dd>
+        <dt><span jhiTranslate="baeldungappApp.comment.creationDate">Creation Date</span></dt>
+        <dd>
+            <span>{{comment.creationDate | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span jhiTranslate="baeldungappApp.comment.postComments">Post Comments</span></dt>
+        <dd>
+            <div *ngIf="comment.postComments">
+                <a [routerLink]="['/post', comment.postComments?.id]">{{comment.postComments?.title}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'comment/'+ comment.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>
